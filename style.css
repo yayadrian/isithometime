@@ -1,0 +1,68 @@
+* {
+	font-family: Verdana, Arial, sans-serif;	
+}
+
+div#topbar {
+	text-align: right;
+	background-color: rgba(25,0,255,0.51);
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 3px;
+	display: block;
+	width: 100%;
+}
+
+#topbar form {
+	
+	margin: 0 6px 0 0;
+	position: relative;
+}
+
+div#yesHomeTime {
+	text-align:  center;
+}
+
+h1 {
+	text-align: center;
+	font-size: 10em;
+
+}
+
+h2 {
+	text-align: center;
+	font-size: 1.5em;
+}
+
+h3 {
+	text-align: center;
+	font-size: 1.4em;
+}
+
+#horizon {
+	background-color: transparent;
+	position: absolute;
+	top: 50%;
+	left: 0px;
+	width: 100%;
+	margin-top: -200px;
+	text-align: center;
+	min-width: 900px; 
+}
+#wrapper {
+	background-color: #fff;
+	position: relative;
+	text-align: left;
+	width: 900px;
+	height: 380px;
+	margin: 0px auto;
+}
+
+div#cuteMessage {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+#messagediv {
+	margin: 20px;
+}
