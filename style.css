@@ -3,20 +3,41 @@
 }
 
 div#topbar {
-	text-align: right;
-	background-color: rgba(25,0,255,0.51);
+	background-color: #01BCFF;
+	float: left;
+	width: 100%;
+	margin: 0;
+	padding: 5px 0;
 	position: fixed;
 	top: 0;
 	left: 0;
-	padding: 3px;
-	display: block;
-	width: 100%;
 }
 
 #topbar form {
-	
-	margin: 0 6px 0 0;
-	position: relative;
+	float: right;
+	margin: 0 15px 0 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+}
+
+div#bottombar {
+	background-color: #01BCFF;
+	float: left;
+	width: 100%;
+	margin: 0;
+	padding: 5px 0;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+#bottombar form {
+	float: left;
+	margin: 0 0 0 15px;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 0;
 }
 
 div#yesHomeTime {
@@ -40,22 +61,13 @@ h3 {
 }
 
 #horizon {
-	background-color: transparent;
-	position: absolute;
-	top: 50%;
-	left: 0px;
 	width: 100%;
-	margin-top: -200px;
 	text-align: center;
-	min-width: 900px; 
+
 }
 #wrapper {
-	background-color: #fff;
 	position: relative;
-	text-align: left;
-	width: 900px;
-	height: 380px;
-	margin: 0px auto;
+	top: 2em;
 }
 
 div#cuteMessage {
@@ -64,5 +76,10 @@ div#cuteMessage {
 }
 
 #messagediv {
+	margin: 20px;
+	text-align: center;
+}
+
+#sandwichvandiv {
 	margin: 20px;
 }

@@ -1,13 +1,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Is it home time</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+<title>Is it home time?</title>
+<script type="text/javascript" src="jquery-1.3.1.min.js"></script>
 <style type="text/css">@import "jquery.countdown.css";</style> 
 <script type="text/javascript" src="jquery.countdown.js"></script>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>Is it home time yet?</title>
-	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>	
 <script type="text/javascript">
 //big yes no
 var d = new Date();
@@ -25,23 +23,32 @@ if (!hometime) {
 var worktime = new Date(year, month, day, 23, 59);
 
 function load() {
+//	var x = readCookie('hometimecookie')
+//	if (x) {
+//		//[do something with x]
+//	}
 	setHomeTime();
 	//set the count down timer
 	$(function () {
-		$('#messagediv').countdown({until: hometime, onExpiry: hideCounter, format: 'HMS'});
+		$('#messagediv').countdown({until: hometime, onExpiry: gohome, format: 'HMS'});
 	});
 	zeroTime();
 		
 }
 
+function liftOff() { 
+    alert('We have lift off!'); 
+} 
+
 function isittime() {
-	if (d > hometime && d < worktime) {
+	if (d > hometime) {
 		return true;
 	} else {
 		return false;
 	}	
 }
 
+// should be passing hometime in and not using a global var
 function setHomeTime() {
 	if (isittime()){ //yep its home time
 		document.getElementById('noHomeTime').style.display='none'
@@ -70,9 +77,10 @@ function setTime() {
 	setHomeTime();
 	//set the count down timer
 	$(function () {
-		$('#messagediv').countdown('change',{until: hometime, format: 'HMS'});
+		$('#messagediv').countdown('change',{until: hometime});
 	});	
 	zeroTime();
+//	createCookie(hometime,7);
 }
 
 function hideCounter() {
@@ -92,13 +100,96 @@ function zeroTime() {
 	}	
 }
 
+function gohome() {
+	alert("It's home time");
+	hideCounter();
+	//fix this, It's repeated all over the place bad bad bad
+	document.getElementById('noHomeTime').style.display='none'
+	document.getElementById('yesHomeTime').style.display='block'
+	document.title = "Yes - it's home time"
+	document.getElementById("isit").innerText = "Yes"
+	document.getElementById("isit").innerHTML = "Yes"
+}
+
+// cookie fun time
+function createCookie(value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = hometimecookie+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function RandomTime(inNextHour, inNextMinute) {
+debugger;
+	var randomHour = Math.floor(Math.random()*(inNextHour + 1))
+	var randomMinute = Math.floor(Math.random()*(inNextHour + 1))
+	returntime = new Date(year, month, day, inNextHour, document.getElementById('minutes').value)
+	
+	return returntime;
+}
+
+function setCustomTime(customOption){
+debugger;
+	switch(customOption)
+	{
+		case "SandwichVan":
+			document.getElementById("sandwichvandiv").style.display = "block";
+			sandwichtime = new Date(year, month, day, 10, 16)
+			//set the count down timer
+			$(function () {
+				$('#sandwichvandiv').countdown({until: sandwichtime, onExpiry: gohome, format: 'HMS'});
+			});				
+			break;
+			
+		case "teatime":
+			document.getElementById("teatimediv").style.display = "block";
+			teatime = new Date(year, month, day, 15, 00)
+			//set the count down timer
+			$(function () {
+				$('#teatimediv').countdown({until: teatime, onExpiry: gohome, format: 'HMS'});
+			});					
+			break;
+			
+		case "hammertime":
+			alert("hammer is coming soon")
+			document.getElementById("hammertimediv").style.display = "block";
+			//set random time in the next 5 minutes 
+			break;
+			
+		case "customtime":		
+			alert("custom time is coming soon")
+			document.getElementById("customtimediv").style.display = "block";
+			// show box and allow user to enter time
+			break;
+			
+		default:
+			alert("say what time is it")
+			
+			break;
+	}
+} 
+
 </script>
 <link rel="stylesheet" href="style.css" type="text/css" />		
 </head>
 
 <body onload="load()">
 
-	<div id="topbar">
+<div id="topbar">
 	<form>
 		<select id="hours">
 		  <option value="00">12 am</option>			
@@ -118,7 +209,7 @@ function zeroTime() {
 		  <option value="14">2 PM</option>
 		  <option value="15">3 PM</option>
 		  <option value="16">4 PM</option>
-		  <option value="17">5 PM</option>
+		  <option value="17" SELECTED>5 PM</option>
 		  <option value="18">6 PM</option>
 		  <option value="19">7 PM</option>
 		  <option value="20">8 PM</option>
@@ -129,10 +220,66 @@ function zeroTime() {
 		</select>
 		
 		<select id="minutes">
-		  <option value="00">00</option>			
-		  <option value="15">15</option>
-		  <option value="30">30</option>
-		  <option value="45">45</option>		  		  
+			<option value="00">00</option>
+			<option value="01">01</option>
+			<option value="02">02</option>
+			<option value="03">03</option>
+			<option value="04">04</option>
+			<option value="05">05</option>
+			<option value="06">06</option>
+			<option value="07">07</option>
+			<option value="08">08</option>
+			<option value="09">09</option>
+			<option value="10">10</option>
+			<option value="11">11</option>
+			<option value="12">12</option>
+			<option value="13">13</option>
+			<option value="14">14</option>
+			<option value="15">15</option>
+			<option value="16">16</option>
+			<option value="17">17</option>
+			<option value="18">18</option>
+			<option value="19">19</option>
+			<option value="20">20</option>
+			<option value="21">21</option>
+			<option value="22">22</option>
+			<option value="23">23</option>
+			<option value="24">24</option>
+			<option value="25">25</option>
+			<option value="26">26</option>
+			<option value="27">27</option>
+			<option value="28">28</option>
+			<option value="29">29</option>
+			<option value="30" selected="selected">30</option>
+			<option value="31">31</option>
+			<option value="32">32</option>
+			<option value="33">33</option>
+			<option value="34">34</option>
+			<option value="35">35</option>
+			<option value="36">36</option>
+			<option value="37">37</option>
+			<option value="38">38</option>
+			<option value="39">39</option>
+			<option value="40">40</option>
+			<option value="41">41</option>
+			<option value="42">42</option>
+			<option value="43">43</option>
+			<option value="44">44</option>
+			<option value="45">45</option>
+			<option value="46">46</option>
+			<option value="47">47</option>
+			<option value="48">48</option>
+			<option value="49">49</option>
+			<option value="50">50</option>
+			<option value="51">51</option>
+			<option value="52">52</option>
+			<option value="53">53</option>
+			<option value="54">54</option>
+			<option value="55">55</option>
+			<option value="56">56</option>
+			<option value="57">57</option>
+			<option value="58">58</option>
+			<option value="59">59</option>	  		  
 		</select>
 		
 		<select id="presentOrFuture">
@@ -141,32 +288,70 @@ function zeroTime() {
 		</select>
 		
 		<input type="submit" value="Set time" onclick="setTime();return false;"/>
-	</form>	
-					
-	</div>
+	</form>					
+</div>
 
 <div id="horizon">
 <div id="wrapper">
 	<div id="yesno">
-		<h1 id="isit">Is it¿</h1>
+		<h1 id="isit">is it home time yet?</h1>
 	</div>
 
-<div id="cuteMessage">
+	<div id="cuteMessage">
+		
+		<div id="noHomeTime" style="display: none;">
+			No it's not home time
+		</div>
+		
+		<div id="yesHomeTime" style="display: none;">
+			It's Home Time get going
+		</div>
 	
-	<div id="noHomeTime" >
-		No its not home time
+		<div id="messagediv">
+		</div>
+		
+		<div id="sandwichvandiv" style="display: none;">
+		yummy
+		</div>	
+		
+		<div id="teatimediv" style="display: none;">
+		bacon
+		</div>
+		
+		<div id="hammertimediv" style="display: none;">
+		bacon
+		</div>	
+	
+		<div id="customtimediv" style="display: none;">
+		</div>	
+		
 	</div>
 	
-	<div id="yesHomeTime">
-		It's Home Time get going
-	</div>
+</div>
+</div>
 
-	<div id="messagediv">
-	</div>	
-</div>
-	
-</div>
+<div id="bottombar">
+	<form>
+		<select id="customTimes" onChange="setCustomTime(customTimes.value);">
+			<option value="Coming soon">Custom times coming soon</option>
+			<option value="not yet">Soon is clearly not soon enough</option>
+<!--		<option>Add custom Timer</option>
+			<option value="SandwichVan">Sandwich Van</option>
+			<option value="teatime">Tea Time</option>
+			<option value="hammertime">Hammer Time</option>
+			<option value="customtime">Custom Time</option>-->
+		</select>
+	</form>
 </div>
 	
 </body>
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-735250-4");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
 </html>

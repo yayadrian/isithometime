@@ -1,1 +1,3 @@
+IsItHomeTime.com
 Just a little site to tell you if it is home time yet.
+Its written to be all server side with a small a footprint and few number of calls to the internet as possible.
