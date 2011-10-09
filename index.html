@@ -8,7 +8,7 @@
 	<style type="text/css">@import "jquery.countdown.css";</style> 
 	<script type="text/javascript" src="jquery.countdown.js"></script>
 	
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>	
 	<script type="text/javascript">
 	//big yes no
 	var d = new Date();
@@ -256,20 +256,11 @@
 		<div id="cuteMessage">
 			
 			<div id="noHomeTime" style="display: none;">
-				No <fb:name uid="loggedinuser" firstnameonly="true" useyou="false" linked="true"></fb:name> it is not home time
-				<p>
-					<input type="button" onclick="callPublish('',{'name':'No it is not home time','href':'http://isithometime.com','description':'Sadly it is not home time just yet. Best get back to work'},null);return false;'Are you looking forward to home time?';" value="Let Facebook know that it is not hometime just yet" />
-					<a href="http://twitter.com/home?status=Nope%20it%20is%20not%20home%20time%20just%20yet.%20I'll%20just%20keep%20waiting%20http%3A%2F%2Fisithometime.com">Let Twitter know</a>
-				</p>
+				No
 			</div>
 			
 			<div id="yesHomeTime" style="display: none;">
-				Yes <fb:name uid="loggedinuser" firstnameonly="true" useyou="false" linked="true"></fb:name> It is Home Time get going
-				<p>
-					<input type="button" onclick="callPublish('',{'name':'Yes it is not home time','href':'http://isithometime.com','description':'Woohoo it is home time. Put that pen down and run home'},null);return false;'What are you planning to do now it is home time?';" value="Let Facebook know that it is hometime" />				
-					<a href="http://twitter.com/home?status=Yay!%20It%20is%20time%20to%20go%20home%20now!%20http%3A%2F%2Fisithometime.com">Let Twitter know that it is hometime!</a>
-				</p>
-				
+				Yes
 			</div>
 		
 			<div id="messagediv">
@@ -284,13 +275,6 @@
 </div>
 </body>
 
-<script type="text/javascript">
-	function callPublish(msg, attachment, action_link, user_message_prompt) {
-	  FB.ensureInit(function () {
-	    FB.Connect.streamPublish('', attachment, action_link, user_message_prompt);
-	  });
-	}
-</script>
 	<!-- Google stats -->
 	<script type="text/javascript">
 	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -301,7 +285,4 @@
 	var pageTracker = _gat._getTracker("UA-735250-4");
 	pageTracker._trackPageview();
 	} catch(err) {}</script>
-	<!-- Facebook -->
-	 <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/en_GB" type="text/javascript"></script><script type="text/javascript">FB.init("6b7cd06b17126343ef70dbf6ab5c6e8f");</script>
-
 </html>
